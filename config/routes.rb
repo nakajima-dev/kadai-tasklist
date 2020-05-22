@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   # ユーザー登録
   get 'signup', to: 'users#new'
-  resources :users, only: [:index, :create]
+  resources :users, only: [:create]
   
   # ログイン、ログアウトセッション
   get 'login', to: 'sessions#new'
