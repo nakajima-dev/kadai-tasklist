@@ -49,10 +49,18 @@ class TasksController < ApplicationController
   
   private
   
+  # def set_task
+  #   @task = current_user.tasks.find(params[:id])
+  # end
   def set_task
-    @task = current_user.tasks.find(params[:id])
+    if current_user.tasks.exists?(params[:id])
+      @task = current_user.tasks.find(params[:id])
+    else
+      flash[:danger] = "他ユーザのTaskにはアクセスできません。"
+      redirect_to root_path
+    end
   end
-  
+      
   # Strong Parameter
   def task_params
     params.require(:task).permit(:content, :status)
